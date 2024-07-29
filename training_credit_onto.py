@@ -3,7 +3,7 @@ import glob
 import os
 
 directories = ["log_o","log_sap"]
-oracle_items = ["Customer Name","Customer PO", "Product Family", "Region", "Order Quantity", "Line Total(USD)","Promise Date"]
+oracle_items = ["Customer Name","Customer PO", "Product Family","Part Number", "Region", "Order Quantity", "Line Total(USD)","Promise Date"]
 sap_items = ["Sold-To Party Name", "Order Quantity (Item)","Net Value (Item)","Delivery Date"]
 def load_data():
     to_return = []
@@ -19,18 +19,26 @@ def load_data():
     return to_return
 
 def get_credits(data):
-    log_o, log_sap = data[0],data[1]
+    log_o = data[0]
+    if len(data)>0:log_sap=data[1]
     credits = log_o.drop(log_o[log_o['Part Number'] != '778752'].index, inplace=False)
     training_items = credits["Customer PO"].tolist()
     training_orders = log_o[log_o['Customer PO'].isin(training_items)]
 
     log_sap["Material"] = log_sap["Material"].astype(str)
-    credits_sap = log_sap.drop(log_sap[log_sap['Material'] != '778752'].index, inplace=False)
+    credits_sap = log_sap
+    # credits_sap = log_sap.drop(log_sap[log_sap['Material'] != '778752'].index, inplace=False)
 
 
-    cleaned_orders = training_orders.loc[~(training_orders['Part Number'] == '778752')].filter(oracle_items)
+    # cleaned_orders = training_orders.loc[~(training_orders['Part Number'] == '778752')].filter(oracle_items)
+    cleaned_orders = training_orders[oracle_items]
     cleaned_orders["Quarter"] = pd.to_datetime(cleaned_orders["Promise Date"],dayfirst=True).dt.quarter
     cleaned_orders["Promise Date"] = (pd.to_datetime(cleaned_orders["Promise Date"],dayfirst=True)).dt.date
+    cleaned_orders = cleaned_orders[
+    (cleaned_orders['Line Total(USD)'] != 0) | 
+    (cleaned_orders['Part Number'] == '778752')
+]
+
 
     cleaned_orders_sap = credits_sap.filter(sap_items)
     cleaned_orders_sap["Quarter"] = pd.to_datetime(cleaned_orders_sap["Delivery Date"],dayfirst=True).dt.quarter
