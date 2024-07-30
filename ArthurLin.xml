@@ -1,0 +1,12 @@
+Version: 1.0.0
+CompanyName: Onto Innovation
+FileDescription: Generate Training Credit Report
+InternalName: training_credit_gen
+OriginalFilename: training_credit_gen.exe
+ProductName: training_credit_gen
+Translation:
+  - langID: 0
+    charsetID: 1200
+  - langID: 1033
+    charsetID: 1252
+Author: Arthur Lin

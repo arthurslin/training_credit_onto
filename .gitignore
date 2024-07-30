@@ -2,3 +2,21 @@ log_sap/SAP Credit report.xlsx
 log_o/Oracle backlog report.xlsx
 training_items.xlsx
 log_o/Backlog (1).xlsx
+training_credit_onto.spec
+version_file.txt
+build/training_credit_onto/Analysis-00.toc
+build/training_credit_onto/base_library.zip
+build/training_credit_onto/EXE-00.toc
+build/training_credit_onto/PKG-00.toc
+build/training_credit_onto/PYZ-00.pyz
+build/training_credit_onto/PYZ-00.toc
+build/training_credit_onto/training_credit_onto.pkg
+build/training_credit_onto/warn-training_credit_onto.txt
+build/training_credit_onto/xref-training_credit_onto.html
+build/training_credit_onto/localpycs/pyimod01_archive.pyc
+build/training_credit_onto/localpycs/pyimod02_importers.pyc
+build/training_credit_onto/localpycs/pyimod03_ctypes.pyc
+build/training_credit_onto/localpycs/pyimod04_pywin32.pyc
+build/training_credit_onto/localpycs/struct.pyc
+dist/training_credit_onto730.exe
+log_o/Backlog  (1).xlsx
